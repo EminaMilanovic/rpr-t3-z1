@@ -3,5 +3,11 @@ package ba.unsa.etf.rpr.tutorijal03;
 pozivni broj za državu npr. "+387".
  */
 public class MedunarodniBroj {
-    MedunarodniBroj(String drzava, String broj){}
+    String br;
+    String drz;
+    MedunarodniBroj(String drzava, String broj){
+        br=broj;
+        drz=drzava;
+    }
+
 }
