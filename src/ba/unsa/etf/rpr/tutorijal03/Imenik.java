@@ -1,6 +1,8 @@
 package ba.unsa.etf.rpr.tutorijal03;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 //impplementirati interfejs comperable<telefonski broj>, overajdati compareto metodu
 /*omogućuje da se pretražuju brojevi koristeći klasu HashMap . Ova klasa
@@ -23,7 +25,8 @@ Pri tome skup treba biti sortiran abecedno.
 g . Ovaj skup treba biti sortiran po stringu koji se dobije metodom ispisi() .
 ● Klasa Program treba sadržavati main metodu koja korisniku omogućuje da unosom
 naredbi pomoću tastature pozove sve metode klasa navedenih iznad.*/
-public class Imenik implements Comparable<TelefonskiBroj>{
+public class Imenik implements Comparable<TelefonskiBroj> {
+
 private HashMap<String,TelefonskiBroj> mapa;
 
     void dodaj(String ime, TelefonskiBroj broj){
@@ -31,6 +34,21 @@ private HashMap<String,TelefonskiBroj> mapa;
          mapa.put(ime,broj);
          }
 
+     String dajBroj(String ime){
+         return "..";
+         }
+
+    Set<String> izGrada(FiksniBroj.Grad grad){ Set<String> set=new HashSet<String>();
+    set.add(" ");
+    return  set;
+    }
+    Set<TelefonskiBroj>  izGradaBrojevi(FiksniBroj.Grad grad){
+           Set<TelefonskiBroj> set=new HashSet<TelefonskiBroj>();
+           set.add(new MedunarodniBroj("bosna","122"));
+           System.out.print(set.contains(new MedunarodniBroj("bosna","122")));
+           return  set;
+       }
+    String naSlovo(char c){return " ";}
     @Override
     public int compareTo(TelefonskiBroj o) {
         return 0;

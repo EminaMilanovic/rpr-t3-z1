@@ -7,11 +7,11 @@ Spisak pozivnih brojeva se može naći ovdje. Umjesto imena kantona koristite im
 import java.util.EnumMap;
 
 public class FiksniBroj extends TelefonskiBroj{
-    private String br;
-    private Grad gr;
-    public enum Grad {
+    enum Grad {
         TRAVNIK,ORASJE,ZENICA,SARAJEVO,LIVNO,TUZLA,MOSTAR,BIHAC,GORAZDE,SIROKI_BRIJEG,BRCKO
     }
+    private String br;
+    private Grad gr;
     private static EnumMap<Grad,String > mapa;
     static{
         mapa=new EnumMap<Grad, String>(Grad.class);
