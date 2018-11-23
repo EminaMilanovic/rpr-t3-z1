@@ -10,10 +10,12 @@ public class MedunarodniBroj  extends  TelefonskiBroj{
         drz=drzava;
     }
     @Override public int hashCode(){
-        return 0;
+        return drz.hashCode();
     }
+
     @Override public  String ispisi(){
         // String s= mreza.toString(); //ZASTO NECE
         return drz+" "+br;
     }
+
 }

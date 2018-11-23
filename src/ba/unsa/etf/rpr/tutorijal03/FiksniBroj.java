@@ -6,7 +6,7 @@ Spisak pozivnih brojeva se može naći ovdje. Umjesto imena kantona koristite im
 
 import java.util.EnumMap;
 
-public class FiksniBroj extends TelefonskiBroj{
+public class FiksniBroj extends TelefonskiBroj implements Comparable<FiksniBroj> {
     enum Grad {
         TRAVNIK,ORASJE,ZENICA,SARAJEVO,LIVNO,TUZLA,MOSTAR,BIHAC,GORAZDE,SIROKI_BRIJEG,BRCKO
     }
@@ -32,6 +32,10 @@ public class FiksniBroj extends TelefonskiBroj{
     br=broj;
     }
 
+    String dajBrojGrada(Grad grad){
+        return mapa.get(grad);
+     }
+
 
     @Override
     public String ispisi(){
@@ -40,5 +44,11 @@ public class FiksniBroj extends TelefonskiBroj{
         return s;
     }
     @Override
-    public int hashCode(){return  0;}  //je li vraca koji grad ili ?
+    public int hashCode(){
+        return ( mapa.get(gr)).hashCode();
+    }
+    @Override
+    public int compareTo(FiksniBroj o) {
+        return  (this.ispisi().compareTo(o.ispisi()));
+    }
 }

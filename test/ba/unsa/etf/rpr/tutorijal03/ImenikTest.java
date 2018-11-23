@@ -39,6 +39,7 @@ class ImenikTest {
         imenik.dodaj("John Smith", new MedunarodniBroj("+1", "23 45-67-89"));
         Set<String> set = imenik.izGrada(SARAJEVO);
         String result = "";
+
         for (String ime: set) {
             result += ime + ",";
         }

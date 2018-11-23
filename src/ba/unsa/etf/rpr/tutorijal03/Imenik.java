@@ -1,17 +1,13 @@
 package ba.unsa.etf.rpr.tutorijal03;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 //impplementirati interfejs comperable<telefonski broj>, overajdati compareto metodu
 /*omogućuje da se pretražuju brojevi koristeći klasu HashMap . Ova klasa
 treba sadržavati sljedeće javne metode:
-○ void dodaj(String ime, TelefonskiBroj broj)
-○ String dajBroj(String ime) - vraća telefonski broj osobe pod imenom ime u
-formi stringa pozivajući metodu ispisi() klase TelefonskiBroj,
-○ String dajIme(TelefonskiBroj broj) - vraća ime osobe čiji telefonski broj je broj
-- i ova operacija treba koristiti HashMapu,
+
+
+
 ○ String naSlovo(char s) - vraća sve brojeve u telefonskom imeniku za osobe čije
 ime počinje na slovo s u formatu:
 1. Ime Prezime - broj
@@ -25,33 +21,60 @@ Pri tome skup treba biti sortiran abecedno.
 g . Ovaj skup treba biti sortiran po stringu koji se dobije metodom ispisi() .
 ● Klasa Program treba sadržavati main metodu koja korisniku omogućuje da unosom
 naredbi pomoću tastature pozove sve metode klasa navedenih iznad.*/
-public class Imenik implements Comparable<TelefonskiBroj> {
+public class Imenik {
 
 private HashMap<String,TelefonskiBroj> mapa;
-
+//string je za ime
+    //prvo kod mape je key-po kojem mozemo pretrazivat
+    Imenik(){
+        mapa=new HashMap<String, TelefonskiBroj>();
+    }
     void dodaj(String ime, TelefonskiBroj broj){
 
          mapa.put(ime,broj);
          }
 
      String dajBroj(String ime){
-         return "..";
+         return (mapa.get(ime)).ispisi();
          }
+    String dajIme(TelefonskiBroj broj){
+       for(Map.Entry<String,TelefonskiBroj> m: mapa.entrySet()){
+           if(m.getValue().equals(broj)) return m.getKey();
+       }
+       return "";
+    }
 
-    Set<String> izGrada(FiksniBroj.Grad grad){ Set<String> set=new HashSet<String>();
-    set.add(" ");
+    Set<String> izGrada(FiksniBroj.Grad grad){
+        FiksniBroj f=new FiksniBroj(FiksniBroj.Grad.SARAJEVO,"333333");
+        SortedSet<String> set=new TreeSet<String>();
+        for(Map.Entry<String,TelefonskiBroj> m: mapa.entrySet()){
+            if(m.getValue().ispisi().substring(0,3).equals(f.dajBrojGrada(grad))) set.add(m.getKey());
+        }
+
     return  set;
     }
     Set<TelefonskiBroj>  izGradaBrojevi(FiksniBroj.Grad grad){
-           Set<TelefonskiBroj> set=new HashSet<TelefonskiBroj>();
-           set.add(new MedunarodniBroj("bosna","122"));
-           System.out.print(set.contains(new MedunarodniBroj("bosna","122")));
+        FiksniBroj f=new FiksniBroj(FiksniBroj.Grad.SARAJEVO,"333333");
+           SortedSet<TelefonskiBroj> set=new TreeSet<TelefonskiBroj>();
+        for(Map.Entry<String,TelefonskiBroj> m: mapa.entrySet()){
+            if(m.getValue().ispisi().substring(0,3).equals(f.dajBrojGrada(grad))) set.add(m.getValue());
+        }
+
            return  set;
        }
-    String naSlovo(char c){return " ";}
-    @Override
-    public int compareTo(TelefonskiBroj o) {
-        return 0;
+    String naSlovo(char c){
+        String spisak=" ";
+        int i=1;
+        for(Map.Entry<String,TelefonskiBroj> m: mapa.entrySet()){
+            if(m.getKey().charAt(0)==c) {
+                spisak += (i + ". "+m.getKey()+" - " + m.getValue().ispisi() + "\n");
+            i++;
+            }
+        }
+
+        return  spisak;
+
     }
+
 
 }
